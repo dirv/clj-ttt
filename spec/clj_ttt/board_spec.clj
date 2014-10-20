@@ -16,8 +16,11 @@
 (defn distinct-square-values [board squares]
   (distinct (map #(get board %) squares)))
 
+(defn single-player-in-subset? [subset]
+  (and (= (count subset) 1) (not= unplayed (first subset))))
+
 (defn won-subset? [board squares]
-  (= '(\X) (distinct-square-values board squares)))
+  (single-player-in-subset? (distinct-square-values board squares)))
 
 (defn won? [board]
   (some
@@ -38,7 +41,11 @@
 
 (describe "winning a game"
           (it "wins a row game"
-              (should= true (won? "XXX------")))
+              (should (won? "XXX------")))
           (it "wins a middle row game"
-              (should= true (won? "---XXX---"))))
+              (should (won? "---XXX---")))
+          (it "wins for O"
+              (should (won? "OOO------")))
+          (it "does not win"
+              (should-not (won? "XXOOOX---"))))
 
