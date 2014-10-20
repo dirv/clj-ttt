@@ -35,3 +35,6 @@
 
 (defn next-player [board]
   (if (> (count-of \X board) (count-of \O board)) "O" "X"))
+
+(defn last-player [board]
+  (if (= "X" (next-player board)) "O" "X"))
