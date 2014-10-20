@@ -5,4 +5,6 @@
 
 (describe "outputs a board string"
           (it "outputs an empty game board"
-              (should= "1 2 3" (board-string "---"))))
+              (should= "1 2 3\n" (board-string "---" 3)))
+          (it "splits game board by newline"
+              (should= "1 2 3\n4 5 6\n" (board-string "------" 3))))
