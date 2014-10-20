@@ -28,3 +28,8 @@
           (it "wins on diagonal"
               (should (won? "X---X---X"))))
 
+(describe "getting playable squares"
+          (it "returns empty list when none available"
+              (should= '() (playable-squares "XXX")))
+          (it "returns items when some available"
+              (should= '(0 1) (playable-squares "--X"))))

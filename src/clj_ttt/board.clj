@@ -26,3 +26,6 @@
 
 (defn won? [board]
   (some #(won-subset? board %) all-wins))
+
+(defn playable-squares [board]
+  (filter #(= unplayed (get board %)) (range 0 (count board))))
