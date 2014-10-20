@@ -29,3 +29,6 @@
 
 (defn playable-squares [board]
   (filter #(= unplayed (get board %)) (range 0 (count board))))
+
+(defn next-player [board]
+  "X")

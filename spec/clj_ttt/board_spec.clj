@@ -33,3 +33,7 @@
               (should= '() (playable-squares "XXX")))
           (it "returns items when some available"
               (should= '(0 1) (playable-squares "--X"))))
+
+(describe "getting next player"
+          (it "returns X as first player"
+              (should= "X" (next-player "---------"))))

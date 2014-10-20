@@ -12,3 +12,4 @@
               (should= "X\n" (board-string "X" 1)))
           (it "shows mixed game"
               (should= "X O X\n4 5 6\n" (board-string "XOX---" 3))))
+
