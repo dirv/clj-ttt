@@ -3,10 +3,13 @@
             [clj-ttt.core :refer :all]))
 
 (defn create-board [size]
-  (apply str (replicate (* size size) "-")))
+  (apply str (replicate (* size size) \-)))
 
 (defn play-move [board square mark]
-  (apply str (assoc (vec board) square mark)))
+   (let [bv (vec board)]
+     (if (= \- (nth bv square))
+       (apply str (assoc bv square mark))
+       board)))
 
 (describe "creating an empty board"
           (it "creates an empty board string"
@@ -19,6 +22,9 @@
 
 (describe "playing a move"
           (it "plays an X"
-              (should= "--X------" (play-move "---------" 2 "X")))
+              (should= "--X------" (play-move "---------" 2 "X"))
+          )
+          (it "only plays a move if square is empty"
+              (should= "X" (play-move "X" 0 "O")))
           )
 
