@@ -14,4 +14,6 @@
 
 (describe "output"
           (it "shows board and next go message"
-              (should= "1 2 3\n4 5 6\n7 8 9\nX's go, choose a square: " (display "---------" 3))))
+              (should= "1 2 3\n4 5 6\n7 8 9\nX's go, choose a square: " (display "---------" 3)))
+          (it "shows winner"
+              (should-contain "X wins!", (display "XXX------" 3))))
