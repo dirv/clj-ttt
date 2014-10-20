@@ -3,6 +3,10 @@
             [clj-ttt.core :refer :all]))
 
 (def ^:const unplayed \-)
+(def ^:const row-wins '([0 1 2] [3 4 5] [6 7 8]))
+(def ^:const col-wins '([0 3 6] [1 4 7] [2 5 8]))
+(def ^:const diag-wins '([0 4 8] [2 4 6]))
+(def ^:const all-wins (concat row-wins col-wins diag-wins))
 
 (defn create-board [size]
   (apply str (replicate (* size size) unplayed)))
@@ -23,9 +27,7 @@
   (single-player-in-subset? (distinct-square-values board squares)))
 
 (defn won? [board]
-  (some
-    #(won-subset? board %)
-    '([0 1 2] [3 4 5] [6 7 8])))
+  (some #(won-subset? board %) all-wins))
 
 (describe "creating an empty board"
           (it "creates an empty board string"
@@ -47,5 +49,9 @@
           (it "wins for O"
               (should (won? "OOO------")))
           (it "does not win"
-              (should-not (won? "XXOOOX---"))))
+              (should-not (won? "XXOOOX---")))
+          (it "wins on column"
+              (should (won? "X--X--X--")))
+          (it "wins on diagonal"
+              (should (won? "X---X---X"))))
 
