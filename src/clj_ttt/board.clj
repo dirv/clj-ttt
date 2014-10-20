@@ -30,5 +30,8 @@
 (defn playable-squares [board]
   (filter #(= unplayed (get board %)) (range 0 (count board))))
 
+(defn count-of [mark board]
+  (count (filter #(= mark %) (vec board))))
+
 (defn next-player [board]
-  "X")
+  (if (> (count-of \X board) (count-of \O board)) "O" "X"))

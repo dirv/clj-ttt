@@ -36,4 +36,6 @@
 
 (describe "getting next player"
           (it "returns X as first player"
-              (should= "X" (next-player "---------"))))
+              (should= "X" (next-player "---------")))
+          (it "returns O as second player"
+              (should= "O" (next-player "X--------"))))
