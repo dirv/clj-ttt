@@ -13,13 +13,16 @@
        (apply str (assoc bv square mark))
        board)))
 
+(defn distinct-square-values [board squares]
+  (distinct (map #(get board %) squares)))
+
+(defn won-subset? [board squares]
+  (= '(\X) (distinct-square-values board squares)))
+
 (defn won? [board]
-  (some 
-  (fn [sub] (= "XXX" sub))
-    (list (subs board 0 3)
-  (subs board 3 6)
-  (subs board 6 9)))
-    )
+  (some
+    #(won-subset? board %)
+    '([0 1 2] [3 4 5] [6 7 8])))
 
 (describe "creating an empty board"
           (it "creates an empty board string"
