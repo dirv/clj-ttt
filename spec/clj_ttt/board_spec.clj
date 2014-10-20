@@ -2,12 +2,14 @@
   (:require [speclj.core :refer :all]
             [clj-ttt.core :refer :all]))
 
+(def ^:const unplayed \-)
+
 (defn create-board [size]
-  (apply str (replicate (* size size) \-)))
+  (apply str (replicate (* size size) unplayed)))
 
 (defn play-move [board square mark]
    (let [bv (vec board)]
-     (if (= \- (nth bv square))
+     (if (= unplayed (nth bv square))
        (apply str (assoc bv square mark))
        board)))
 
