@@ -42,4 +42,6 @@
 
 (describe "getting last player"
           (it "returns X if X has just played"
-              (should= "X" (last-player "X--"))))
+              (should= "X" (last-player "X--")))
+          (it "returns O if O has just played"
+              (should= "O" (last-player "XO-"))))
