@@ -26,7 +26,15 @@
 (defn read-move []
   (dec (read-string (read-line))))
 
+(defn print-board [board size]
+  (println (display board size)))
+
 (defn play-cli-move [board size]
-  (println (display board size))
+  (print-board board size)
   (play-move board (read-move) (next-player board)))
 
+(defn play-until-finish [board size]
+  (let [new-board (play-cli-move board size)]
+    (if (won? new-board)
+      (print-board new-board size)
+      (play-until-finish new-board size))))
