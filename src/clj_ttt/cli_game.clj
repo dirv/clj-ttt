@@ -22,3 +22,6 @@
 
 (defn display [board size]
   (str (board-string board size) (play_message board)))
+
+(defn read-move []
+  (dec (read-string (read-line))))
