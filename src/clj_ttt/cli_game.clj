@@ -15,13 +15,18 @@
 (defn board-string [board size]
   (apply str (map output-board-line (partition size (numbers-or-marks board)))))
 
-(defn play_message [board]
+(defn play-message [board]
   (if (won? board)
     (str (last-player board) " wins!")
     (str (next-player board) "'s go, choose a square: ")))
 
 (defn display [board size]
-  (str (board-string board size) (play_message board)))
+  (str (board-string board size) (play-message board)))
 
 (defn read-move []
   (dec (read-string (read-line))))
+
+(defn play-cli-move [board size]
+  (println (display board size))
+  (play-move board (read-move) (next-player board)))
+

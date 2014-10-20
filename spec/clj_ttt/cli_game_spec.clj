@@ -16,8 +16,17 @@
           (it "shows board and next go message"
               (should= "1 2 3\n4 5 6\n7 8 9\nX's go, choose a square: " (display "---------" 3)))
           (it "shows winner"
-              (should-contain "X wins!", (display "XXX------" 3))))
+              (should-contain "X wins!" (display "XXX------" 3))))
 
 (describe "prompt for move"
           (it "gets square to play"
               (should= 2 (with-in-str "3" (read-move)))))
+
+
+(describe "play one move"
+          (it "should prompt for move"
+              (should-contain "choose a square: "
+                              (with-out-str (with-in-str "1\n" (play-cli-move "---------" 3)))))
+          (it "should play move"
+              (should= "X--------"
+                       (with-in-str "1]\n" (play-cli-move "---------" 3)))))
