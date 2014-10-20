@@ -14,3 +14,9 @@
 
 (defn board-string [board size]
   (apply str (map output-board-line (partition size (numbers-or-marks board)))))
+
+(defn play_message [board]
+  (str (next-player board) "'s go, choose a square: "))
+
+(defn display [board size]
+  (str (board-string board size) (play_message board)))
