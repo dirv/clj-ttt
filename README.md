@@ -1,4 +1,1 @@
-clj-ttt
-=======
-
-Clojure TTT implementation
+# clj-ttt
