@@ -7,14 +7,11 @@
 (defn number-or-mark [mark index playable-squares]
   (if (some #{index} playable-squares)
     (str (inc index))
-    mark
-    ))
+    mark))
 
 (defn numbers-or-marks [board]
   (let [playable-squares (playable-squares board)]
     (map-indexed (fn [index mark] (number-or-mark mark index playable-squares)) (seq board))))
 
 (defn board-string [board size]
-  (let [square-strings (numbers-or-marks board)]
-    (apply str (map output-board-line (vec (partition size square-strings))))
-    ))
+  (apply str (map output-board-line (partition size (numbers-or-marks board)))))
