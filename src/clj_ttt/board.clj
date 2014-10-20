@@ -30,6 +30,9 @@
 (defn playable-squares [board]
   (filter #(= unplayed (get board %)) (range 0 (count board))))
 
+(defn finished? [board]
+  (or (won? board) (= 0 (count (playable-squares board)))))
+
 (defn count-of [mark board]
   (count (filter #(= mark %) (vec board))))
 

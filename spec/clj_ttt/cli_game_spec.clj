@@ -34,4 +34,7 @@
 (describe "play until win"
           (it "should play multiple moves"
               (should-contain "wins!" (with-out-str (with-in-str "6\n3\n4\n5\n"
-                                                      (play-until-finish "XX-O-----" 3))))))
+                                                      (play-until-finish "XX-O-----" 3)))))
+          (it "should stop when game is not won"
+              (should-contain "It's a draw!" (with-out-str (with-in-str "1\n"
+                                                             (play-until-finish "-XOOOXXXO" 3))))))

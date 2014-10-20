@@ -45,3 +45,7 @@
               (should= "X" (last-player "X--")))
           (it "returns O if O has just played"
               (should= "O" (last-player "XO-"))))
+
+(describe "finishing a game"
+          (it "returns true if game is finished"
+              (should (finished? "XXOOOXXXO"))))

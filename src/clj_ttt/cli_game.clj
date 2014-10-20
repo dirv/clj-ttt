@@ -18,7 +18,9 @@
 (defn play-message [board]
   (if (won? board)
     (str (last-player board) " wins!")
-    (str (next-player board) "'s go, choose a square: ")))
+    (if (finished? board)
+      (str "It's a draw!")
+      (str (next-player board) "'s go, choose a square: "))))
 
 (defn display [board size]
   (str (board-string board size) (play-message board)))
@@ -35,6 +37,6 @@
 
 (defn play-until-finish [board size]
   (let [new-board (play-cli-move board size)]
-    (if (won? new-board)
+    (if (finished? new-board)
       (print-board new-board size)
       (play-until-finish new-board size))))
