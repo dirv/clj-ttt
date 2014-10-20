@@ -9,6 +9,9 @@
 (defn create-board [size]
   (apply str (replicate (* size size) unplayed)))
 
+(defn size [board]
+  (int (Math/sqrt (count board))))
+
 (defn play-move [board square mark]
    (let [bv (vec board)]
      (if (= unplayed (nth bv square))

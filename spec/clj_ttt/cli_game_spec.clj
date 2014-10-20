@@ -3,20 +3,18 @@
             [clj-ttt.cli-game :refer :all]))
 
 (describe "outputs a board string"
-          (it "outputs an empty game board"
-              (should= "1 2 3\n" (board-string "---" 3)))
           (it "splits game board by newline"
-              (should= "1 2 3\n4 5 6\n" (board-string "------" 3)))
+              (should= "1 2 3\n4 5 6\n7 8 9\n" (board-string "---------")))
           (it "shows mark for played square"
-              (should= "X\n" (board-string "X" 1)))
+              (should= "X\n" (board-string "X")))
           (it "shows mixed game"
-              (should= "X O X\n4 5 6\n" (board-string "XOX---" 3))))
+              (should= "X O X\n4 5 6\n7 8 9\n" (board-string "XOX------"))))
 
 (describe "output"
           (it "shows board and next go message"
-              (should= "1 2 3\n4 5 6\n7 8 9\nX's go, choose a square: " (display "---------" 3)))
+              (should= "1 2 3\n4 5 6\n7 8 9\nX's go, choose a square: " (display "---------")))
           (it "shows winner"
-              (should-contain "X wins!" (display "XXX------" 3))))
+              (should-contain "X wins!" (display "XXX------"))))
 
 (describe "prompt for move"
           (it "gets square to play"
@@ -26,15 +24,15 @@
 (describe "play one move"
           (it "should prompt for move"
               (should-contain "choose a square: "
-                              (with-out-str (with-in-str "1\n" (play-cli-move "---------" 3)))))
+                              (with-out-str (with-in-str "1\n" (play-cli-move "---------")))))
           (it "should play move"
               (should= "X--------"
-                       (with-in-str "1]\n" (play-cli-move "---------" 3)))))
+                       (with-in-str "1]\n" (play-cli-move "---------")))))
 
 (describe "play until win"
           (it "should play multiple moves"
               (should-contain "wins!" (with-out-str (with-in-str "6\n3\n4\n5\n"
-                                                      (play-until-finish "XX-O-----" 3)))))
+                                                      (play-until-finish "XX-O-----")))))
           (it "should stop when game is not won"
               (should-contain "It's a draw!" (with-out-str (with-in-str "1\n"
-                                                             (play-until-finish "-XOOOXXXO" 3))))))
+                                                             (play-until-finish "-XOOOXXXO"))))))
