@@ -1,12 +1,15 @@
 (ns clj-ttt.computer-player
   (:require [clj-ttt.board :refer :all]))
 
-(def ^:const no-score {:score -1 :board nil})
+(def ^:const no-score {:score -1 :board nil :alpha -1000 :beta 1000})
 
 (defn score [board depth]
   (if (won? board)
     depth
     0))
+
+(defn all-moves [board mark squares]
+  (map #(play-move board % mark) squares))
 
 (declare play)
 
@@ -16,17 +19,16 @@
      new-move (play board next-player (dec depth))
      new-score (- (:score new-move))]
     (if (> new-score (:score current))
-      {:score new-score :board board}
+      {:score new-score :board board :alpha -1000 :beta 1000}
       current)))
-
-
-(defn all-moves [board mark squares]
-  (map #(play-move board % mark) squares))
 
 (defn play [board mark depth]
   (if (or (= 0 depth) (finished? board))
     {:score (- (score board depth)) :board board}
-    (reduce #(best-move %1 %2 depth)
+    (reduce (fn [current board] 
+              (if (>= (:alpha current) (:beta current))
+                (reduced current)
+                (best-move current board depth)))
             no-score
             (all-moves board mark (playable-squares board)))))
 
