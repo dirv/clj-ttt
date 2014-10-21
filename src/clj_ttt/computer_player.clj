@@ -1,7 +1,7 @@
 (ns clj-ttt.computer-player
   (:require [clj-ttt.board :refer :all]))
 
-(def ^:const no-score {:score 0 :board nil})
+(def ^:const no-score {:score -1 :board nil})
 
 (defn score [board depth]
   (if (won? board)
@@ -31,4 +31,4 @@
             (all-moves board mark (playable-squares board)))))
 
 (defn choose-next-move [board mark]
-  (:board (play board mark (count (playable-squares board)))))
+  (:board (play board mark (inc (count (playable-squares board))))))
