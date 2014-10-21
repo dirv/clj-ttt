@@ -4,7 +4,7 @@
 (def ^:const infinity 1000)
 
 (defn score [board depth]
-  (if (won? board) depth 0))
+  (if (won? board) (- depth) 0))
 
 (defn all-moves [board mark squares]
   (map #(play-move board % mark) squares))
@@ -14,7 +14,7 @@
 
 (defn play [board mark depth alpha beta]
   (if (or (= 0 depth) (finished? board))
-    {:score (- (score board depth)) :board board :alpha alpha :beta beta}
+    {:score (score board depth) :board board :alpha alpha :beta beta}
 
     (let [next-player (last-player board)
           next-depth (dec depth)]
