@@ -28,6 +28,10 @@
 (defn read-move []
   (dec (read-string (read-line))))
 
+(defn read-human [player]
+  (print (str "Is player " player " human? "))
+  (= "y" (read-line)))
+
 (defn print-board [board]
   (println (display board)))
 

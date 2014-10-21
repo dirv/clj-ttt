@@ -20,6 +20,13 @@
           (it "gets square to play"
               (should= 2 (with-in-str "3" (read-move)))))
 
+(describe "prompt if human"
+          (it "determines if X is human"
+              (should= true (with-in-str "y" (read-human "X"))))
+          (it "determines if X isn't human"
+              (should= false (with-in-str "n" (read-human "X"))))
+          (it "shows message"
+              (should-contain "Is player X human?" (with-out-str (with-in-str "y" (read-human "X"))))))
 
 (describe "play one move"
           (it "should prompt for move"
@@ -36,3 +43,4 @@
           (it "should stop when game is not won"
               (should-contain "It's a draw!" (with-out-str (with-in-str "1\n"
                                                              (play-until-finish "-XOOOXXXO"))))))
+
