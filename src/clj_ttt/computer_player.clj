@@ -38,4 +38,3 @@
             (inc (count (playable-squares board)))
             (- infinity)
             infinity)))
-

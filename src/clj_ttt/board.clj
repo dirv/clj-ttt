@@ -18,13 +18,13 @@
        (apply str (assoc bv square (name mark)))
        board)))
 
-(defn distinct-square-values [board squares]
+(defn- distinct-square-values [board squares]
   (distinct (map #(get board %) squares)))
 
-(defn single-player-in-subset? [subset]
+(defn- single-player-in-subset? [subset]
   (and (= (count subset) 1) (not= unplayed (first subset))))
 
-(defn won-subset? [board squares]
+(defn- won-subset? [board squares]
   (single-player-in-subset? (distinct-square-values board squares)))
 
 (defn won? [board]
@@ -36,7 +36,7 @@
 (defn finished? [board]
   (or (won? board) (= 0 (count (playable-squares board)))))
 
-(defn count-of [mark board]
+(defn- count-of [mark board]
   (count (filter #(= mark %) (vec board))))
 
 (defn next-player [board]
