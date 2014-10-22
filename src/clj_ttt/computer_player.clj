@@ -35,6 +35,6 @@
   (:board (play
             board
             mark
-            (inc (count (playable-squares board)))
+            (min 9 (inc (count (playable-squares board))))
             (- infinity)
             infinity)))

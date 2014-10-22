@@ -35,6 +35,10 @@
     :human
     :computer))
 
+(defn read-board-size []
+  (println "What size of game would you like to play? 3 or 4 is an appropriate choice.")
+  (read-string (read-line)))
+
 (defn print-board [board]
   (println (display board)))
 
@@ -49,7 +53,8 @@
   (if-not (finished? board)
     (play-until-finish (make-player-move board x o) x o)))
 
-(defn prompt-and-play [board]
-  (let [x (read-human :X)
+(defn prompt-and-play []
+  (let [size (read-board-size)
+        x (read-human :X)
         o (read-human :O)]
-    (play-until-finish board x o)))
+    (play-until-finish (create-board size) x o)))

@@ -28,6 +28,9 @@
           (it "shows message"
               (should-contain "Is player X human?" (with-out-str (with-in-str "y" (read-human :X))))))
 
+(describe "prompt for size"
+          (it "determines size"
+              (should= 3 (with-in-str "3" (read-board-size)))))
 (defn play-human-move [board]
   (make-player-move board :human :human))
 
@@ -45,20 +48,11 @@
                                                       (play-human-human "XX-O-----")))))
           (it "should stop when game is not won"
               (should-contain "It's a draw!" (with-out-str (with-in-str "1\n"
-                                                             (play-human-human "-XOOOXXXO"))))))
-
-(describe "prompts for players and then plays"
-          (it "should prompt for human moves"
-              (should-contain "X wins!" (with-out-str
-                                     (with-in-str "y\ny\n5\n3\n"
-                                                    (prompt-and-play "XX-O-----")))))
-          (it "should prompt for human computer moves"
-              (should-contain "X wins!" (with-out-str
-                                          (with-in-str "n\ny\n"
-                                            (prompt-and-play "XX-OO----")))))
-          (it "should prompt for computer computer moves"
+                                                             (play-human-human "-XOOOXXXO")))))
+          (it "plays computer game"
               (should-contain "It's a draw!" (with-out-str
-                                          (with-in-str "n\nn\n"
-                                          (prompt-and-play "---------")))))
-          )
+                                               (play-until-finish "---------" :computer :computer))))
+          (it "plays a 4x4 computer game",
+              (should-contain "X wins" (with-out-str
+                                         (play-until-finish "XO---XO---XO----" :computer :computer)))))
 
