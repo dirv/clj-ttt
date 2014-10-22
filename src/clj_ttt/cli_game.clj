@@ -18,7 +18,7 @@
 
 (defn play-message [board]
   (if (won? board)
-    (str (last-player board) " wins!")
+    (str (name (last-player board)) " wins!")
     (if (finished? board)
       (str "It's a draw!")
       (str (name (next-player board)) "'s go, choose a square: "))))
