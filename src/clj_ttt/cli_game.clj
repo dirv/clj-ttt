@@ -38,10 +38,7 @@
 (defn print-board [board]
   (println (display board)))
 
-(defn next-player-type [board x-type o-type]
-  (if-x-is-next board x-type o-type))
-
-(defmulti make-player-move (fn [board x o] (next-player-type board x o)))
+(defmulti make-player-move (fn [board x o] (if-x-is-next board x o)))
 (defmethod make-player-move :human [board x o]
   (play-move board (read-move) (next-player board)))
 (defmethod make-player-move :computer [board x o]
