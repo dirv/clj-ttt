@@ -47,15 +47,10 @@
 (defmethod make-player-move :computer [board x o]
   (choose-next-move board (next-player board)))
 
-(defn play-cli-move [board x o]
-  (print-board board)
-  (make-player-move board x o))
-
 (defn play-until-finish [board x o]
-  (let [new-board (play-cli-move board x o)]
-    (if (finished? new-board)
-      (print-board new-board)
-      (play-until-finish new-board x o))))
+  (print-board board)
+  (if-not (finished? board)
+    (play-until-finish (make-player-move board x o) x o)))
 
 (defn prompt-and-play [board]
   (let [x (read-human "X")

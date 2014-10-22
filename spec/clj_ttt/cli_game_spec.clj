@@ -29,15 +29,12 @@
               (should-contain "Is player X human?" (with-out-str (with-in-str "y" (read-human "X"))))))
 
 (defn play-human-move [board]
-  (play-cli-move board :human :human))
+  (make-player-move board :human :human))
 
 (defn play-human-human [board]
   (play-until-finish board :human :human))
 
 (describe "play one move"
-          (it "should prompt for move"
-              (should-contain "choose a square: "
-                              (with-out-str (with-in-str "1\n" (play-human-move "---------")))))
           (it "should play move"
               (should= "X--------"
                        (with-in-str "1\n" (play-human-move "---------")))))
