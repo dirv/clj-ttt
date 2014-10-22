@@ -22,9 +22,9 @@
 
 (describe "prompt if human"
           (it "determines if X is human"
-              (should= true (with-in-str "y" (read-human "X"))))
+              (should= :human (with-in-str "y" (read-human "X"))))
           (it "determines if X isn't human"
-              (should= false (with-in-str "n" (read-human "X"))))
+              (should= :computer (with-in-str "n" (read-human "X"))))
           (it "shows message"
               (should-contain "Is player X human?" (with-out-str (with-in-str "y" (read-human "X"))))))
 
