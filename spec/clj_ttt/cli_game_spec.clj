@@ -28,19 +28,25 @@
           (it "shows message"
               (should-contain "Is player X human?" (with-out-str (with-in-str "y" (read-human "X"))))))
 
+(defn play-human-move [board]
+  (play-cli-move board :human))
+
+(defn play-human-human [board]
+  (play-until-finish board :human :human))
+
 (describe "play one move"
           (it "should prompt for move"
               (should-contain "choose a square: "
-                              (with-out-str (with-in-str "1\n" (play-cli-move "---------")))))
+                              (with-out-str (with-in-str "1\n" (play-human-move "---------")))))
           (it "should play move"
               (should= "X--------"
-                       (with-in-str "1]\n" (play-cli-move "---------")))))
+                       (with-in-str "1]\n" (play-human-move "---------")))))
 
 (describe "play until win"
           (it "should play multiple moves"
               (should-contain "wins!" (with-out-str (with-in-str "6\n3\n4\n5\n"
-                                                      (play-until-finish "XX-O-----")))))
+                                                      (play-human-human "XX-O-----")))))
           (it "should stop when game is not won"
               (should-contain "It's a draw!" (with-out-str (with-in-str "1\n"
-                                                             (play-until-finish "-XOOOXXXO"))))))
+                                                             (play-human-human "-XOOOXXXO"))))))
 

@@ -37,12 +37,12 @@
 (defn print-board [board]
   (println (display board)))
 
-(defn play-cli-move [board]
+(defn play-cli-move [board player]
   (print-board board)
   (play-move board (read-move) (next-player board)))
 
-(defn play-until-finish [board]
-  (let [new-board (play-cli-move board)]
+(defn play-until-finish [board x o]
+  (let [new-board (play-cli-move board :human)]
     (if (finished? new-board)
       (print-board new-board)
-      (play-until-finish new-board))))
+      (play-until-finish new-board x o))))
