@@ -10,9 +10,9 @@
 
 (describe "playing a move"
           (it "plays an X"
-              (should= "--X------" (play-move "---------" 2 "X")))
+              (should= "--X------" (play-move "---------" 2 :X)))
           (it "only plays a move if square is empty"
-              (should= "X" (play-move "X" 0 "O"))))
+              (should= "X" (play-move "X" 0 :O))))
 
 (describe "winning a game"
           (it "wins a row game"
@@ -36,15 +36,15 @@
 
 (describe "getting next player"
           (it "returns X as first player"
-              (should= "X" (next-player "---")))
+              (should= :X (next-player "---")))
           (it "returns O as second player"
-              (should= "O" (next-player "X--"))))
+              (should= :O (next-player "X--"))))
 
 (describe "getting last player"
           (it "returns X if X has just played"
-              (should= "X" (last-player "X--")))
+              (should= :X (last-player "X--")))
           (it "returns O if O has just played"
-              (should= "O" (last-player "XO-"))))
+              (should= :O (last-player "XO-"))))
 
 (describe "finishing a game"
           (it "returns true if game is finished"

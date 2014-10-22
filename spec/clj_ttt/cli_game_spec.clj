@@ -22,11 +22,11 @@
 
 (describe "prompt if human"
           (it "determines if X is human"
-              (should= :human (with-in-str "y" (read-human "X"))))
+              (should= :human (with-in-str "y" (read-human :X))))
           (it "determines if X isn't human"
-              (should= :computer (with-in-str "n" (read-human "X"))))
+              (should= :computer (with-in-str "n" (read-human :X))))
           (it "shows message"
-              (should-contain "Is player X human?" (with-out-str (with-in-str "y" (read-human "X"))))))
+              (should-contain "Is player X human?" (with-out-str (with-in-str "y" (read-human :X))))))
 
 (defn play-human-move [board]
   (make-player-move board :human :human))

@@ -21,7 +21,7 @@
     (str (last-player board) " wins!")
     (if (finished? board)
       (str "It's a draw!")
-      (str (next-player board) "'s go, choose a square: "))))
+      (str (name (next-player board)) "'s go, choose a square: "))))
 
 (defn display [board]
   (str (board-string board) (play-message board)))
@@ -30,7 +30,7 @@
   (dec (read-string (read-line))))
 
 (defn read-human [player]
-  (println (str "Is player " player " human? "))
+  (println (str "Is player " (name player) " human? "))
   (if (= "y" (read-line))
     :human
     :computer))
@@ -39,7 +39,7 @@
   (println (display board)))
 
 (defn next-player-type [board x-type o-type]
-  (if (= "X" (next-player board)) x-type o-type))
+  (if (= :X (next-player board)) x-type o-type))
 
 (defmulti make-player-move (fn [board x o] (next-player-type board x o)))
 (defmethod make-player-move :human [board x o]
@@ -53,6 +53,6 @@
     (play-until-finish (make-player-move board x o) x o)))
 
 (defn prompt-and-play [board]
-  (let [x (read-human "X")
-        o (read-human "O")]
+  (let [x (read-human :X)
+        o (read-human :O)]
     (play-until-finish board x o)))

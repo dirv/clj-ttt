@@ -15,7 +15,7 @@
 (defn play-move [board square mark]
    (let [bv (vec board)]
      (if (= unplayed (nth bv square))
-       (apply str (assoc bv square mark))
+       (apply str (assoc bv square (name mark)))
        board)))
 
 (defn distinct-square-values [board squares]
@@ -40,7 +40,7 @@
   (count (filter #(= mark %) (vec board))))
 
 (defn next-player [board]
-  (if (> (count-of \X board) (count-of \O board)) "O" "X"))
+  (if (> (count-of \X board) (count-of \O board)) :O :X))
 
 (defn last-player [board]
-  (if (= "X" (next-player board)) "O" "X"))
+  (if (= :X (next-player board)) :O :X))
