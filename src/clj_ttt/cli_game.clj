@@ -38,22 +38,21 @@
 (defn print-board [board]
   (println (display board)))
 
-(defmulti make-player-move (fn [player-type board] player-type))
-(defmethod make-player-move :human [player-type board]
+(defn next-player-type [board x-type o-type]
+  (if (= "X" (next-player board)) x-type o-type))
+
+(defmulti make-player-move (fn [board x o] (next-player-type board x o)))
+(defmethod make-player-move :human [board x o]
   (play-move board (read-move) (next-player board)))
-(defmethod make-player-move :computer [player-type board]
+(defmethod make-player-move :computer [board x o]
   (choose-next-move board (next-player board)))
 
-(defn play-cli-move [board player-type]
+(defn play-cli-move [board x o]
   (print-board board)
-  (make-player-move player-type board))
-
-(defn next-player-type [board x o]
-  (if (= "X" (next-player board)) x o))
+  (make-player-move board x o))
 
 (defn play-until-finish [board x o]
-  (let [player-type (next-player-type board x o)
-        new-board (play-cli-move board player-type)]
+  (let [new-board (play-cli-move board x o)]
     (if (finished? new-board)
       (print-board new-board)
       (play-until-finish new-board x o))))

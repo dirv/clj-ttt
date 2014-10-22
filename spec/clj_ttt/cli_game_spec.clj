@@ -29,7 +29,7 @@
               (should-contain "Is player X human?" (with-out-str (with-in-str "y" (read-human "X"))))))
 
 (defn play-human-move [board]
-  (play-cli-move board :human))
+  (play-cli-move board :human :human))
 
 (defn play-human-human [board]
   (play-until-finish board :human :human))
