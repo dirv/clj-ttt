@@ -26,7 +26,9 @@
           (it "wins on column"
               (should (won? "X--X--X--")))
           (it "wins on diagonal"
-              (should (won? "X---X---X"))))
+              (should (won? "X---X---X")))
+          (it "wins a four by four"
+              (should (won? "X----X----X----X"))))
 
 (describe "getting playable squares"
           (it "returns empty list when none available"
