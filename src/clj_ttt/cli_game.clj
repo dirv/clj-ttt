@@ -30,7 +30,7 @@
   (dec (read-string (read-line))))
 
 (defn read-human [player]
-  (print (str "Is player " player " human? "))
+  (println (str "Is player " player " human? "))
   (if (= "y" (read-line))
     :human
     :computer))

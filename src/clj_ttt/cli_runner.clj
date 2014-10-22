@@ -4,4 +4,4 @@
             [clj-ttt.board :refer :all]))
 
 (defn -main []
-  (play-until-finish (create-board 3) 3))
+  (prompt-and-play (create-board 3)))
