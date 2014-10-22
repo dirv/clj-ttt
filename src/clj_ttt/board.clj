@@ -42,5 +42,8 @@
 (defn next-player [board]
   (if (> (count-of \X board) (count-of \O board)) :O :X))
 
+(defn if-x-is-next [board x o]
+  (if (= :X (next-player board)) x o))
+
 (defn last-player [board]
-  (if (= :X (next-player board)) :O :X))
+  (if-x-is-next board :O :X))

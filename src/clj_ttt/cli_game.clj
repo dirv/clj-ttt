@@ -39,7 +39,7 @@
   (println (display board)))
 
 (defn next-player-type [board x-type o-type]
-  (if (= :X (next-player board)) x-type o-type))
+  (if-x-is-next board x-type o-type))
 
 (defmulti make-player-move (fn [board x o] (next-player-type board x o)))
 (defmethod make-player-move :human [board x o]
