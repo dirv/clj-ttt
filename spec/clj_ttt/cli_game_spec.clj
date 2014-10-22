@@ -40,7 +40,7 @@
                               (with-out-str (with-in-str "1\n" (play-human-move "---------")))))
           (it "should play move"
               (should= "X--------"
-                       (with-in-str "1]\n" (play-human-move "---------")))))
+                       (with-in-str "1\n" (play-human-move "---------")))))
 
 (describe "play until win"
           (it "should play multiple moves"
@@ -49,4 +49,19 @@
           (it "should stop when game is not won"
               (should-contain "It's a draw!" (with-out-str (with-in-str "1\n"
                                                              (play-human-human "-XOOOXXXO"))))))
+
+(describe "prompts for players and then plays"
+          (it "should prompt for human moves"
+              (should-contain "X wins!" (with-out-str
+                                     (with-in-str "y\ny\n5\n3\n"
+                                                    (prompt-and-play "XX-O-----")))))
+          (it "should prompt for human computer moves"
+              (should-contain "X wins!" (with-out-str
+                                          (with-in-str "n\ny\n"
+                                            (prompt-and-play "XX-OO----")))))
+          (it "should prompt for computer computer moves"
+              (should-contain "It's a draw!" (with-out-str
+                                          (with-in-str "n\nn\n"
+                                          (prompt-and-play "---------")))))
+          )
 

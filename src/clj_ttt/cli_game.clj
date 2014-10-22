@@ -1,5 +1,6 @@
 (ns clj-ttt.cli-game
-  (:require [clj-ttt.board :refer :all]))
+  (:require [clj-ttt.board :refer :all]
+            [clj-ttt.computer-player :refer :all]))
 
 (defn output-board-line [square-strings]
   (str (clojure.string/join " " square-strings) "\n"))
@@ -37,12 +38,23 @@
 (defn print-board [board]
   (println (display board)))
 
-(defn play-cli-move [board player]
+(defn play-cli-move [board player-type]
   (print-board board)
-  (play-move board (read-move) (next-player board)))
+  (if (= :human player-type)
+    (play-move board (read-move) (next-player board))
+    (choose-next-move board (next-player board))))
+
+(defn next-player-type [board x o]
+  (if (= "X" (next-player board)) x o))
 
 (defn play-until-finish [board x o]
-  (let [new-board (play-cli-move board :human)]
+  (let [player-type (next-player-type board x o)
+        new-board (play-cli-move board player-type)]
     (if (finished? new-board)
       (print-board new-board)
       (play-until-finish new-board x o))))
+
+(defn prompt-and-play [board]
+  (let [x (read-human "X")
+        o (read-human "O")]
+    (play-until-finish board x o)))

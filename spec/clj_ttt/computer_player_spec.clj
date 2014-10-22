@@ -8,4 +8,6 @@
           (it "wins a game for O"
               (should= "XXO-OXO--" (choose-next-move "XX--OXO--" "O")))
           (it "chooses middle square if it's free"
-              (should= "X---O----" (choose-next-move "X--------" "O"))))
+              (should= "X---O----" (choose-next-move "X--------" "O")))
+          (it "makes block"
+              (should= "XXOO-----" (choose-next-move "XX-O-----" "O"))))
