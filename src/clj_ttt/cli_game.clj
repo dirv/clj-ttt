@@ -56,12 +56,9 @@
   (choose-next-move board (next-player board)))
 
 (defn play-until-finish [board x o]
-  (loop [board board
-         x x
-         o o]
-    (print-board board)
-    (if-not (finished? board)
-      (recur (make-player-move board x o) x o))))
+  (print-board board)
+  (if-not (finished? board)
+    (recur (make-player-move board x o) x o)))
 
 (defn prompt-and-play []
   (let [size (read-board-size)
