@@ -57,7 +57,7 @@
 
 (defn play-until-finish [board x o]
   (print-board board)
-  (if-not (finished? board)
+  (when-not (finished? board)
     (recur (make-player-move board x o) x o)))
 
 (defn prompt-and-play []
