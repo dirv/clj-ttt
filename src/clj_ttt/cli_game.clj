@@ -8,13 +8,20 @@
 (defn- number-or-mark [index mark playable-squares]
   (if (some #{index} playable-squares)
     (str (inc index))
-    mark))
+    (str mark)))
 
 (defn- numbers-or-marks [board]
   (map-indexed #(number-or-mark %1 %2 (playable-squares board)) board))
 
+(defn- padding-format-string [strs]
+  (str "%" (apply max (map count strs)) "s"))
+
+(defn- padded-numbers-or-marks [board]
+  (let [all-strs (numbers-or-marks board)]
+    (map #(format (padding-format-string all-strs) %) all-strs)))
+
 (defn board-string [board]
-  (apply str (map output-board-line (partition (size board) (numbers-or-marks board)))))
+  (apply str (map output-board-line (partition (size board) (padded-numbers-or-marks board)))))
 
 (defn play-message [board]
   (if (won? board)
