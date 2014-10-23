@@ -1,3 +1,0 @@
-* Validation of square range in read-move
-* Validation of number input in read-move
-* Always passing board and size together---what to do about this?
