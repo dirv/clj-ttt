@@ -53,10 +53,10 @@
           (it "should stop when game is not won"
               (should-contain "It's a draw!" (with-out-str (with-in-str "1\n"
                                                              (play-human-human "-XOOOXXXO")))))
-          (xit "plays computer game"
+          (it "plays computer game"
               (should-contain "It's a draw!" (with-out-str
                                                (play-until-finish "---------" :computer :computer))))
-          (xit "plays a 4x4 computer game",
+          (it "plays a 4x4 computer game",
               (should-contain "X wins" (with-out-str
-                                         (play-until-finish "XO---XO---XO----" :computer :computer)))))
+                                         (play-until-finish "XOXO-XOXO-XO----" :computer :computer)))))
 

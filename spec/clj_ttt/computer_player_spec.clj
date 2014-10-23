@@ -12,4 +12,4 @@
           (it "makes block"
               (should= "XXOO-----" (choose-next-move "XX-O-----" "O")))
           (it "can win a 4x4 game"
-              (should= "XXXXOOO---------" (choose-next-move "XXX-OOO---------" "X"))))
+              (should= "XXXXOOOXO-------" (choose-next-move "XXX-OOOXO-------" "X"))))
